@@ -14,6 +14,8 @@ This application uses cookies as an authentication method. The process is simple
 
 `VITE_API_DEV_URL="http://0.0.0.0:8025"`
 
+<img width="757" alt="Screenshot 2023-08-24 at 23 51 22" src="https://github.com/b-laztornex/kzo-admin-panel/assets/50735049/cb8512fe-bfbd-40bc-94e8-d3d401c7fe7d">
+
 make sure that the url match the one that is expose when running uvicorn
 
 ## Project structure
