@@ -45,7 +45,7 @@ export async function load({ cookies }) {
 		let distance = velocity * new Date(timestamps[i]).getTime();
 
 		motor_velocity.push(velocity);
-		motor_distance.push(distance);
+		motor_distance.push(timeDiff);
 	}
 
 	return {

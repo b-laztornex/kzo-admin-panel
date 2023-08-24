@@ -20,11 +20,11 @@
 	$: navigation = [
 		{
 			href: '/',
-			name: 'Home'
+			name: $t('navbar.home')
 		},
 		{
 			href: '/dashboard',
-			name: `${propValue ? '' : '🔒'} Dashboard`
+			name: `${propValue ? '' : '🔒'}` + $t('navbar.dashboard')
 		}
 	];
 
@@ -47,7 +47,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="#"> {$t('navbar.brand')}</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -102,15 +102,17 @@
 									{/each}
 								</select>
 
-								<input type="submit" class="btn btn-success" value="Save" />
+								<input type="submit" class="btn btn-success" value={$t('navbar.save')} />
 							</div>
 						{/if}
 					</form>
-					<button on:click={handleSignOut} class="btn btn-dark mx-5"> Logout </button>
+					<button on:click={handleSignOut} class="btn btn-dark mx-5">
+						{$t('navbar.logout')}
+					</button>
 				</div>
 			{:else}
 				<form class="d-flex">
-					<a href="/login" class="btn btn-info"> Login </a>
+					<a href="/login" class="btn btn-info"> {$t('navbar.login')} </a>
 				</form>
 			{/if}
 		</div>

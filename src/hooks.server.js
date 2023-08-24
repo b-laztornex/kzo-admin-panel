@@ -13,7 +13,6 @@ export const handle = async ({ event, resolve }) => {
 
 	if (Boolean(query) == true) {
 		await event.cookies.set('token', '', { path: '/', maxAge: 0 });
-		//await event.cookies.delete('token', { path: '/' });
 		throw redirect(303, '/login');
 	}
 

@@ -1,5 +1,11 @@
 export default {
 	de: {
+		'navbar.save': 'Speichern',
+		'navbar.home': 'Home',
+		'navbar.dashboard': 'Dashboard',
+		'navbar.brand': 'KZOADMIN[DE]',
+		'navbar.logout': 'Abmelden',
+		'navbar.login': 'Anmelden',
 		'loginpage.login': 'Anmeldung',
 		'loginpage.sign_in': 'Anmelden',
 		'loginpage.forgot_password': 'Passwort vergessen',
@@ -22,6 +28,12 @@ export default {
 			'In order to use the dashboard log in with the credentials that the Administrator share with you:'
 	},
 	en: {
+		'navbar.save': 'Save',
+		'navbar.home': 'Home',
+		'navbar.dashboard': 'Dashboard',
+		'navbar.brand': 'KZOADMIN[EN]',
+		'navbar.logout': 'Logout',
+		'navbar.login': 'Login',
 		'loginpage.login': 'Login',
 		'loginpage.sign_in': 'Sign in',
 		'loginpage.forgot_password': 'Forgot password',
@@ -44,6 +56,12 @@ export default {
 			'In order to use the dashboard log in with the credentials that the Administrator share with you:'
 	},
 	es: {
+		'navbar.save': 'Guardar',
+		'navbar.home': 'Inicio',
+		'navbar.dashboard': 'Panel',
+		'navbar.brand': 'KZOADMIN[ES]',
+		'navbar.logout': 'Salir',
+		'navbar.login': 'Ingresar',
 		'loginpage.login': 'Acceso',
 		'loginpage.sign_in': 'Iniciar sesión',
 		'loginpage.forgot_password': 'Has olvidado tu contraseña',
