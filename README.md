@@ -9,6 +9,7 @@ This application uses cookies as an authentication method. The process is simple
 ## Running the project locally
 
 1.  [back end] start the server `poetry run uvicorn app:app --host 0.0.0.0 --port 8025`
+<img width="874" alt="Screenshot 2023-08-24 at 23 54 18" src="https://github.com/b-laztornex/kzo-admin-panel/assets/50735049/c6ca3028-8464-4183-bac8-a566ac38ce93">
 
 2.  [front end] Once the service already start, create an `.env` file in the root of the folder and add the following in the file:
 
