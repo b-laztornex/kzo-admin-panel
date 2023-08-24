@@ -2,29 +2,37 @@
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## Running the poject locally
+## Running the project locally
 
-1.  [back end] start the server poetry run uvicorn app:app --host 0.0.0.0 --port 8025
+1.  [back end] start the server `poetry run uvicorn app:app --host 0.0.0.0 --port 8025`
 
-2.  [front end] Once the service already start, create an .env file in the root of the folder and add the following in the file:
+2.  [front end] Once the service already start, create an `.env` file in the root of the folder and add the following in the file:
 
-VITE_API_DEV_URL="http://0.0.0.0:8025"
+`VITE_API_DEV_URL="http://0.0.0.0:8025"`
 
 make sure that the url match the one that is expose when running uvicorn
 
-3. [front end] make sure to install all the depencies runnig npm install
+## Project structure
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- src
+  - lib
+    - components
+      [here are located al the reusable componets avaliable for the app]
+      - CardData.svelte
+      - Navbar.svelte
+      - Toasts.svelte
+        ...
+    - locale
+      [contains the necesary files for translate the text in the app and also the logic to set/retrieve the language]
+      - i18n.js
+      - translations.js
+        [all the transalations are store in this file]
+  - routes
+    [all the pages of the app are included in this folder]
+  - store
+    [contain the logic for all the reactive variables that we want to share across our componets]
+  - hooks.server.js
+    [in this file, is the logic that handle the auth. basically each time that the hook intercept a request, will check for the token store in the cookies, if theres any, the access to the dashboard will be granted otherwise the user will be redirected to the login page]
 
 ## Developing
 
