@@ -46,3 +46,36 @@ export async function load({ cookies }) {
 		language: language.message.toLowerCase()
 	};
 }
+
+export const actions = {
+	setln: async ({ cookies, request }) => {
+		const token = cookies.get('token');
+		const headers = { 'Content-Type': 'application/json', Cookie: `token =${token}` };
+		const form = await request.formData();
+		const language = form.get('language');
+
+		if (language === '') {
+			return { code: 1, message: 'language should not be empty' };
+		}
+
+		const api_url = import.meta.env.VITE_API_DEV_URL;
+
+		const response = await fetch(`${api_url}/set_language`, {
+			method: 'POST',
+			headers: headers,
+			body: JSON.stringify({
+				language: language?.toUpperCase()
+			})
+		});
+
+		const body = await response.json();
+
+		if (response.status === 200) {
+			const { message, new_language, token } = body;
+			return { code: 0, message: message, new_language: new_language };
+		} else {
+			const { detail } = body;
+			return { code: 1, message: detail };
+		}
+	}
+};

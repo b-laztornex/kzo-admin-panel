@@ -1,15 +1,17 @@
 <script>
+	import { enhance } from '$app/forms';
 	import { t, locale, locales } from '../../lib/locale/i18n.js';
-
+	import { addToast } from '../../store/store';
 	import { createEventDispatcher } from 'svelte';
 	/**
 	 * @type {any}
 	 */
 	export let propValue;
+	let isLoading = false;
+
+	let selected = '';
 
 	let isDisabled = propValue === undefined ? true : false;
-
-	//import { user } from '../../store/store.js';
 
 	/**
 	 * @type {any}
@@ -41,72 +43,76 @@
 			signout: true
 		});
 	};
-
-	const onChange = async () => {
-		const api_url = import.meta.env.VITE_API_DEV_URL;
-
-		const response = await fetch(`${api_url}/set_language`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				language: $locale
-			})
-		});
-
-		const body = await response.json();
-
-		if (response.status === 200) {
-			// TODO: Handle ok language change
-		} else {
-			// TODO: show msg on language set failed
-		}
-	};
-	//$locale = 'es';
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-	<a class="navbar-brand" href="#">Navbar</a>
-	<button
-		class="navbar-toggler"
-		type="button"
-		data-toggle="collapse"
-		data-target="#navbarNav"
-		aria-controls="navbarNav"
-		aria-expanded="false"
-		aria-label="Toggle navigation"
-	>
-		<span class="navbar-toggler-icon" />
-	</button>
-	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
-			{#each navigation as link}
-				<li class="nav-item">
-					<a class="nav-link" href={link.href}> {link.name}</a>
-				</li>
-			{/each}
-
-			{#if propValue}
-				<li>
-					<button on:click={handleSignOut} class="btn btn-dark"> Logout </button>
-				</li>
-			{:else}
-				<li>
-					<a href="/login" class="btn btn-info"> Login </a>
-				</li>
-			{/if}
-		</ul>
-		<div class="form-inline mx-2">
-			<select
-				bind:value={$locale}
-				on:change={onChange}
-				class="form-select"
-				aria-label="Disabled select example"
-				disabled={isDisabled}
-			>
-				{#each locales as l}
-					<option value={l}>{l}</option>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon" />
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				{#each navigation as link}
+					<li class="nav-item">
+						<a class="nav-link" href={link.href}> {link.name}</a>
+					</li>
 				{/each}
-			</select>
+			</ul>
+			{#if propValue}
+				<div class="d-flex">
+					<form
+						method="POST"
+						action="?/setln"
+						use:enhance={() => {
+							isLoading = true;
+							return async ({ result, update }) => {
+								await update();
+								isLoading = false;
+								addToast({
+									message: `${result?.data?.message}  ${result?.data?.new_language}`,
+									type: result?.data?.code == 0 ? 'success' : 'error',
+									dismissible: true,
+									timeout: 4000
+								});
+
+								//creating = false;
+							};
+						}}
+					>
+						{#if !isLoading}
+							<div class="group d-flex">
+								<select
+									name="language"
+									id="language"
+									bind:value={$locale}
+									class="form-select"
+									aria-label="Disabled select example"
+								>
+									{#each locales as l}
+										<option value={l}>{l}</option>
+									{/each}
+								</select>
+
+								<input type="submit" class="btn btn-success" value="Save" />
+							</div>
+						{/if}
+					</form>
+					<button on:click={handleSignOut} class="btn btn-dark mx-5"> Logout </button>
+				</div>
+			{:else}
+				<form class="d-flex">
+					<a href="/login" class="btn btn-info"> Login </a>
+				</form>
+			{/if}
 		</div>
 	</div>
 </nav>

@@ -1,5 +1,7 @@
 <script>
 	import { t, locale, locales } from '../../lib/locale/i18n.js';
+	import Toasts from '../../lib/components/Toasts.svelte';
+
 	import LineChart from '../../lib/components/LineChart.svelte';
 	export let data;
 	let chartData = data.position;
@@ -11,22 +13,17 @@
 	<title>Dashboard</title>
 	<meta name="description" content="chartData analythics" />
 </svelte:head>
+<Toasts />
 <div class="px-2 outer-container-box">
 	<div class="container container-box">
 		<div class="row">
 			<h1>{$t('dashboard.welcome')}</h1>
 		</div>
 		<div class="row">
-			<div class="col-sm">One of three columns</div>
-			<div class="col-sm">One of three columns</div>
-			<div class="col-sm">One of three columns</div>
+			<LineChart data={chartData} />
 		</div>
 		<div class="row">
-			<div class="col-sm"><LineChart data={chartData} /></div>
-		</div>
-
-		<div class="row">
-			<div class="col-sm"><LineChart data={velocityChartData} /></div>
+			<LineChart data={velocityChartData} />
 		</div>
 	</div>
 </div>

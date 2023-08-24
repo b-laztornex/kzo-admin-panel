@@ -1,52 +1,81 @@
 <script>
-	import { HintGroup, Hint } from 'svelte-use-form';
+	import { enhance } from '$app/forms';
+	import Toasts from '../../lib/components/Toasts.svelte';
+	import { addToast } from '../../store/store';
 	import { t } from '../../lib/locale/i18n.js';
+	import { goto } from '$app/navigation';
+
 	export let form;
+	let isLoading = false;
 	let email = '';
 	let password = '';
 </script>
 
+<Toasts />
+
 <div class="login-wrap">
 	<div class="login-html">
-		<form method="POST">
-			<h1>{$t('loginpage.login')}</h1>
-			<input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
-				for="tab-1"
-				class="tab">{$t('loginpage.sign_in')}</label
-			>
-			<input id="tab-2" type="radio" name="tab" class="for-pwd" /><label for="tab-2" class="tab"
-				>{$t('loginpage.forgot_password')}</label
-			>
-			<div class="login-form">
-				<div class="sign-in-htm">
-					<div class="group">
-						<label for="email" class="label">{$t('loginpage.username')}</label>
-						<input type="text" class="w-100" name="email" bind:value={email} required />
-					</div>
-					<div class="group">
-						<label for="password" class="label">{$t('loginpage.password')}</label>
-						<input type="password" class="w-100" name="password" bind:value={password} required />
-					</div>
-					<div class="group">
-						<input type="submit" class="button" value="Sign In" />
-					</div>
-					<div class="hr" />
+		<form
+			method="POST"
+			use:enhance={() => {
+				isLoading = true;
+				return async ({ result, update }) => {
+					await update();
+					isLoading = false;
+					let data = result?.data;
+					addToast({
+						message: data?.message,
+						type: data.code == 0 ? 'success' : 'error',
+						dismissible: true,
+						timeout: 4000
+					});
+					if (data.code == 0) {
+						await goto('dashboard');
+					}
+					//creating = false;
+				};
+			}}
+		>
+			{#if !isLoading}
+				<h1>{$t('loginpage.login')}</h1>
+				<input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
+					for="tab-1"
+					class="tab">{$t('loginpage.sign_in')}</label
+				>
+				<input id="tab-2" type="radio" name="tab" class="for-pwd" /><label for="tab-2" class="tab"
+					>{$t('loginpage.forgot_password')}</label
+				>
+				<div class="login-form">
+					<div class="sign-in-htm">
+						<div class="group">
+							<label for="email" class="label">{$t('loginpage.username')}</label>
+							<input type="text" class="w-100" name="email" bind:value={email} required />
+						</div>
+						<div class="group">
+							<label for="password" class="label">{$t('loginpage.password')}</label>
+							<input type="password" class="w-100" name="password" bind:value={password} required />
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign In" />
+						</div>
+						<div class="hr" />
 
-					{#if form?.incorrect}<p class="alert alert-danger">
-							{$t('loginpage.invalid_credentials')}
-						</p>{/if}
-				</div>
-				<div class="for-pwd-htm">
-					<div class="group">
-						<label for="user" class="label">{$t('loginpage.username')}</label>
-						<input id="user" type="text" class="input" />
+						{#if form?.incorrect}<p class="alert alert-danger">
+								{$t('loginpage.invalid_credentials')}
+							</p>{/if}
 					</div>
-					<div class="group">
-						<input type="submit" class="button" value="Reset Password" />
+					<div class="for-pwd-htm">
+						<div class="group">
+							<label for="user" class="label">{$t('loginpage.username')}</label>
+							<input id="user" type="text" class="input" />
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Reset Password" />
+						</div>
+						<div class="hr" />
 					</div>
-					<div class="hr" />
 				</div>
-			</div>
+			{/if}
 		</form>
 	</div>
 </div>

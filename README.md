@@ -2,6 +2,18 @@
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
+## Running the poject locally
+
+1.  [back end] start the server poetry run uvicorn app:app --host 0.0.0.0 --port 8025
+
+2.  [front end] Once the service already start, create an .env file in the root of the folder and add the following in the file:
+
+VITE_API_DEV_URL="http://0.0.0.0:8025"
+
+make sure that the url match the one that is expose when running uvicorn
+
+3. [front end] make sure to install all the depencies runnig npm install
+
 ## Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
