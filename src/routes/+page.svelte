@@ -1,24 +1,27 @@
+<script>
+	import { t, locale } from '../lib/locale/i18n.js';
+	export let data;
+
+	if (data?.language !== undefined) {
+		$locale = data?.language;
+	}
+</script>
+
 <div class="container container-box">
-	<div class="row">
-		<h1>Welcome to dashboard</h1>
+	<div class="row mt-5">
+		<h1>{$t('home.welcome')}</h1>
 	</div>
 
-	<div class="row">
+	<div class="row mt-5">
 		<h3>
-			<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+			<p>{$t('home.visit')} <a href="https://kit.svelte.dev">kit.svelte.dev</a></p>
 		</h3>
 	</div>
 
-	<div class="row">
+	<div class="row mt-5">
 		<h4>
-			In order to use the dashboard <a href="/login">Log in</a> with the creadentials that the Administrator
-			share with you
+			{$t('home.login')} <a href="/login">Log in</a>
 		</h4>
-	</div>
-	<div class="row">
-		<div class="col-sm">One of three columns</div>
-		<div class="col-sm">One of three columns</div>
-		<div class="col-sm">One of three columns</div>
 	</div>
 </div>
 

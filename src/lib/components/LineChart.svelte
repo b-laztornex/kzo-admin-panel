@@ -38,10 +38,8 @@
 			<line stroke="currentColor" x1={xScale(tick)} x2={xScale(tick)} y1={0} y2={6} />
 
 			<!-- X-Axis Tick Labels -->
-			<text fill="currentColor" text-anchor="middle" x={xScale(tick)} y={30}>
-				{tick.getHours()} :
-				{tick.getMinutes()} :
-				{tick.getSeconds()}
+			<text class="x-axis-text" fill="currentColor" text-anchor="middle" x={xScale(tick)} y={30}>
+				{tick.getDate()}
 			</text>
 		{/each}
 	</g>
@@ -90,6 +88,11 @@
 </svg>
 
 <style>
+	.x-axis-text {
+		font-size: 10px;
+		color: white;
+		font-weight: 500;
+	}
 	#chart2 .chart {
 		width: 960px;
 		max-height: 470px;

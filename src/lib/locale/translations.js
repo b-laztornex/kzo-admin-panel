@@ -6,7 +6,20 @@ export default {
 		'loginpage.username': 'Benutzername oder E-Mail-Adresse',
 		'loginpage.password': 'Passwort',
 		'loginpage.invalid_credentials': 'Ungültige Anmeldeinformationen!',
-		'dashboard.welcome': 'Willkommen im Dashboard!'
+		'dashboard.card_max_velocity': 'Maximale Geschwindigkeit',
+		'dashboard.card_max_distance': 'Maximale Entfernung',
+		'dashboard.card_max_time': 'Maximale Zeit',
+		'dashboard.welcome': 'Willkommen im Dashboard!',
+		'dashboard.chart_position_title': 'Motorpositionsdiagramm zu einem bestimmten Zeitpunkt',
+		'dashboard.chart_position_desc': 'Position',
+		'dashboard.chart_velocity_title': 'Motorgeschwindigkeitsdiagramm zum Erreichen einer Position',
+		'dashboard.chart_velocity_desc': 'Geschwindigkeit',
+		'dashboard.chart_distance_title': 'Motordistanzdiagramm in Zeitintervallen',
+		'dashboard.chart_distance_desc': 'Entfernung',
+		'home.welcome': 'Welcome to the Admin Dashboard Panel',
+		'home.visit': 'Visit svelteKit to read the documentation:',
+		'home.login':
+			'In order to use the dashboard log in with the credentials that the Administrator share with you:'
 	},
 	en: {
 		'loginpage.login': 'Login',
@@ -15,7 +28,20 @@ export default {
 		'loginpage.username': 'Usename or email',
 		'loginpage.password': 'Password',
 		'loginpage.invalid_credentials': 'Invalid credentials!',
-		'dashboard.welcome': 'Welcome to Dashboard!'
+		'dashboard.card_max_velocity': 'Maximum velocity',
+		'dashboard.card_max_distance': 'Max distance',
+		'dashboard.card_max_time': 'Maximum time',
+		'dashboard.welcome': 'Welcome to Dashboard!',
+		'dashboard.chart_position_title': 'Engine position graph at a given time',
+		'dashboard.chart_position_desc': 'position',
+		'dashboard.chart_velocity_title': 'Motor speed graph to reach a position',
+		'dashboard.chart_velocity_desc': 'velocity',
+		'dashboard.chart_distance_title': 'Motor distance graph in time intervals',
+		'dashboard.chart_distance_desc': 'distance',
+		'home.welcome': 'Welcome to the Admin Dashboard Panel',
+		'home.visit': 'Visit svelteKit to read the documentation:',
+		'home.login':
+			'In order to use the dashboard log in with the credentials that the Administrator share with you:'
 	},
 	es: {
 		'loginpage.login': 'Acceso',
@@ -24,6 +50,19 @@ export default {
 		'loginpage.username': 'Nombre de usuario o correo electrónico',
 		'loginpage.password': 'Contraseña',
 		'loginpage.invalid_credentials': 'Credenciales invalidas!',
-		'dashboard.welcome': 'Bienvenido al Panel!'
+		'dashboard.welcome': 'Bienvenido al Panel!',
+		'dashboard.card_max_velocity': 'Maxima velocidad',
+		'dashboard.card_max_distance': 'Maxima distancia',
+		'dashboard.card_max_time': 'Maximo tiempo',
+		'dashboard.chart_position_title': 'Grafico posicion del motor en un tiempo determinado',
+		'dashboard.chart_position_desc': 'posicion',
+		'dashboard.chart_velocity_title': 'Grafico velocidad del motor para alcanzar una posicion',
+		'dashboard.chart_velocity_desc': 'velocidad',
+		'dashboard.chart_distance_title': 'Grafico recorrido del motor en intervalos de tiempo',
+		'dashboard.chart_distance_desc': 'distancia',
+		'home.welcome': 'Bienvenido al panel de administración',
+		'home.visit': 'Visite svelteKit para leer la documentación:',
+		'home.login':
+			'Para usar el tablero, inicie sesión con las credenciales que el Administrador comparte con usted:'
 	}
 };

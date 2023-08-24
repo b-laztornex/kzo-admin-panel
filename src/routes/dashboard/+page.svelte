@@ -1,9 +1,11 @@
 <script>
 	import { t, locale, locales } from '../../lib/locale/i18n.js';
 	import Toasts from '../../lib/components/Toasts.svelte';
+	import CardData from '../../lib/components/CardData.svelte';
+	import ExpChart from '../../lib/components/ExpChart.svelte';
 
-	import LineChart from '../../lib/components/LineChart.svelte';
 	export let data;
+
 	let chartData = data.position;
 	let velocityChartData = data.velocity;
 	$locale = data.language;
@@ -19,11 +21,46 @@
 		<div class="row">
 			<h1>{$t('dashboard.welcome')}</h1>
 		</div>
-		<div class="row">
-			<LineChart data={chartData} />
+
+		<div class="row mt-4">
+			<div class="col-12 col-md-4 py-2">
+				<CardData title={$t('dashboard.card_max_velocity')} data={data.max_position} />
+			</div>
+			<div class="col-12 col-md-4 py-2">
+				<CardData
+					title={$t('dashboard.card_max_distance') + ' (m)'}
+					data={data.max_velocity.toFixed(6)}
+				/>
+			</div>
+			<div class="col-12 col-md-4 py-2">
+				<CardData title={$t('dashboard.card_max_time') + ' (ms)'} data={data.max_distances} />
+			</div>
 		</div>
-		<div class="row">
-			<LineChart data={velocityChartData} />
+
+		<div class="row mt-4">
+			<ExpChart
+				positions={data.motor_positions}
+				timestamps={data.timestamps}
+				title={$t('dashboard.chart_position_title')}
+				desc={$t('dashboard.chart_position_desc')}
+			/>
+		</div>
+		<hr />
+		<div class="row mt-4">
+			<ExpChart
+				positions={data.velocity}
+				timestamps={data.timestamps}
+				title={$t('dashboard.chart_velocity_title')}
+				desc={$t('dashboard.chart_velocity_desc')}
+			/>
+		</div>
+		<div class="row mt-4">
+			<ExpChart
+				positions={data.distances}
+				timestamps={data.timestamps}
+				title={$t('dashboard.chart_distance_title')}
+				desc={$t('dashboard.chart_distance_desc')}
+			/>
 		</div>
 	</div>
 </div>

@@ -2,13 +2,19 @@
 	import { enhance } from '$app/forms';
 	import Toasts from '../../lib/components/Toasts.svelte';
 	import { addToast } from '../../store/store';
-	import { t } from '../../lib/locale/i18n.js';
+	import { t, locale } from '../../lib/locale/i18n.js';
 	import { goto } from '$app/navigation';
 
 	export let form;
+	export let data;
+
 	let isLoading = false;
 	let email = '';
 	let password = '';
+
+	if (data?.language !== undefined) {
+		$locale = data?.language;
+	}
 </script>
 
 <Toasts />
