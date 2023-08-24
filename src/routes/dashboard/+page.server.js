@@ -11,51 +11,53 @@ export async function load({ cookies }) {
 		headers: headers
 	});
 
-	const language = await getLanguage.json();
+	const responseLanguage = await getLanguage.json();
+
+	if (getLanguage.status !== 200) {
+		await cookies.set('token', '', { path: '/', maxAge: 0 });
+		throw redirect(307, '/login');
+	}
 
 	const getMotorPosition = await fetch(`${api_url}/get_motor_position`, {
 		method: 'GET',
 		headers: headers
 	});
 
-	const position = await getMotorPosition.json();
+	const responseMotorposition = await getMotorPosition.json();
 
-	if (getLanguage.status !== 200 || getMotorPosition.status !== 200) {
+	if (getMotorPosition.status !== 200) {
 		await cookies.set('token', '', { path: '/', maxAge: 0 });
 		throw redirect(307, '/login');
 	}
 
-	let timestamps = position.message.timestamps;
-	let motor_positions = position.message.motor_positions;
-
-	let tempData = timestamps.map(function (e, i) {
-		return { date: e, position: motor_positions[i] };
-	});
-
-	let diferenceTime = [0];
-	let distances = [0];
+	let timestamps = responseMotorposition.message.timestamps;
+	let motor_positions = responseMotorposition.message.motor_positions;
+	let motor_velocity = [0];
+	let motor_distance = [0];
 
 	for (let i = 0; i < timestamps.length - 1; i++) {
-		let diff = new Date(timestamps[i + 1]).getTime() - new Date(timestamps[i]).getTime();
-		let currentVelocity = motor_positions[i] / diff;
+		// Difference between 2 dates in ms
+		let timeDiff = new Date(timestamps[i + 1]).getTime() - new Date(timestamps[i]).getTime();
 
-		let distance = currentVelocity * new Date(timestamps[i]).getTime();
+		// Calculation of the velocity based in the postition and time difference
+		let velocity = motor_positions[i] / timeDiff;
 
-		diferenceTime.push(currentVelocity);
-		distances.push(diff);
+		let distance = velocity * new Date(timestamps[i]).getTime();
+
+		motor_velocity.push(velocity);
+		motor_distance.push(distance);
 	}
 
 	return {
 		token: token,
 		timestamps: timestamps,
 		motor_positions: motor_positions,
-		position: tempData,
-		velocity: diferenceTime,
-		distances: distances,
+		motor_velocity: motor_velocity,
+		motor_distance: motor_distance,
 		max_position: Math.max(...motor_positions),
-		max_velocity: Math.max(...diferenceTime),
-		max_distances: Math.max(...distances),
-		language: language.message.toLowerCase()
+		max_velocity: Math.max(...motor_velocity),
+		max_distances: Math.max(...motor_distance),
+		language: responseLanguage.message.toLowerCase()
 	};
 }
 

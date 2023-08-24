@@ -20,7 +20,6 @@
 	const onExport = () => chartRef.exportChart();
 
 	const onDataSelect = (event) => {
-		console.log('Data select event fired!', event);
 		selected = event;
 	};
 

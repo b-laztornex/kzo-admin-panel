@@ -5,9 +5,6 @@
 	import ExpChart from '../../lib/components/ExpChart.svelte';
 
 	export let data;
-
-	let chartData = data.position;
-	let velocityChartData = data.velocity;
 	$locale = data.language;
 </script>
 
@@ -48,7 +45,7 @@
 		<hr />
 		<div class="row mt-4">
 			<ExpChart
-				positions={data.velocity}
+				positions={data.motor_velocity}
 				timestamps={data.timestamps}
 				title={$t('dashboard.chart_velocity_title')}
 				desc={$t('dashboard.chart_velocity_desc')}
@@ -56,7 +53,7 @@
 		</div>
 		<div class="row mt-4">
 			<ExpChart
-				positions={data.distances}
+				positions={data.motor_distance}
 				timestamps={data.timestamps}
 				title={$t('dashboard.chart_distance_title')}
 				desc={$t('dashboard.chart_distance_desc')}
