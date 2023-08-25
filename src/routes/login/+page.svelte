@@ -81,6 +81,18 @@
 						<div class="hr" />
 					</div>
 				</div>
+			{:else}
+				<div class="d-flex justify-content-center">
+					<div class="spinner-border text-light" role="status">
+						<span class="sr-only" />
+					</div>
+				</div>
+				<div class="d-flex justify-content-center mt-5">
+					<button class="btn btn-primary" type="button" disabled>
+						<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+						{$t('loginpage.wating_time')}
+					</button>
+				</div>
 			{/if}
 		</form>
 	</div>
